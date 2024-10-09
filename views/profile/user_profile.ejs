@@ -1,0 +1,352 @@
+<%- include("../includes/header.ejs") %> <%- include("../includes/sidebar.ejs") %>
+
+<div class="wrapper">
+  <div class="content-wrapper">
+    <!-- Starting Section -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profile</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active">User Profile</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Image and Name -->
+          <div class="col-md-3">
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img
+                    class="profile-user-img img-circle img-responsive img-responsive"
+                    src="img/userImages/<%= userData.image %>"
+                    alt="User profile picture"
+                  />
+                </div>
+                <h3 class="profile-username text-center">
+                  <%= userData.fullName %>
+                </h3>
+                <p class="text-muted text-center">Software Engineer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      href="#activity"
+                      data-toggle="tab"
+                      >Profile</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#settings" data-toggle="tab"
+                      >Change</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+                    <!-- Display Profile Data -->
+                    <form class="form-horizontal">
+                      <!-- Full Name -->
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label"
+                          >Full Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputName"
+                            value="<%= userData.fullName  %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <!-- Email -->
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label"
+                          >Email</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="inputEmail"
+                            value="<%= userData.email %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <!-- Number -->
+                      <div class="form-group row">
+                        <label for="inputNumber" class="col-sm-2 col-form-label"
+                          >Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputNumber"
+                            value="<%= userData.number %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <!-- Gender -->
+                      <div class="form-group row">
+                        <label for="inputGender" class="col-sm-2 col-form-label"
+                          >Gender</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputGender"
+                            value="<%= userData.gender %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <!-- Date of Birth -->
+                      <div class="form-group row">
+                        <label for="inputDob" class="col-sm-2 col-form-label"
+                          >Date of Birth</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputDob"
+                            value="<%= userData.formattedDob %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <!-- Hobbies -->
+                      <div class="form-group row">
+                        <label
+                          for="inputHobbies"
+                          class="col-sm-2 col-form-label"
+                          >Hobbies</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputHobbies"
+                            value="<%= userData.hobbies %>"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="tab-pane" id="settings">
+                    <!-- Profile Form -->
+                    <form
+                      class="form-horizontal"
+                      method="post"
+                      id="formProfile"
+                      enctype="multipart/form-data"
+                      action="/profile"
+                    >
+                      <!-- Profile Image -->
+                      <div class="form-group row">
+                        <label for="inputImage" class="col-sm-2 col-form-label"
+                          >Profile Image</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="image"
+                            id="inputImage"
+                          />
+                          <input
+                            type="hidden"
+                            name="image_old"
+                            value="<%= userData.image %>"
+                          />
+                        </div>
+                      </div>
+                      <!-- Full Name -->
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label"
+                          >Full Name <span class="text-danger">*</span></label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputName"
+                            name="fullname"
+                            placeholder="Full Name"
+                            value="<%= userData.fullName %>"
+                          />
+                        </div>
+                      </div>
+                      <!-- Email -->
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label"
+                          >Email <span class="text-danger">*</span></label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="inputEmail"
+                            name="email"
+                            placeholder="Email"
+                            value="<%= userData.email %>"
+                          />
+                        </div>
+                      </div>
+                      <!-- Number -->
+                      <div class="form-group row">
+                        <label for="inputNumber" class="col-sm-2 col-form-label"
+                          >Number <span class="text-danger">*</span></label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputNumber"
+                            name="number"
+                            placeholder="Number"
+                            value="<%= userData.number %>"
+                          />
+                        </div>
+                      </div>
+                      <!-- Gender -->
+                      <div class="form-group row">
+                        <label for="inputGender" class="col-sm-2 col-form-label"
+                          >Gender</label
+                        >
+                        <div class="col-sm-10">
+                          <label for="male">
+                            <input type="radio" name="gender" id="male"
+                            value="Male" <% if (userData.gender === "Male") { %>
+                            checked <% } %> /> Male
+                          </label>
+                          <label for="female">
+                            <input type="radio" name="gender" id="female"
+                            value="Female" <% if (userData.gender === "Female")
+                            { %> checked <% } %> /> Female
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="inputDob" class="col-sm-2 col-form-label"
+                          >Date of Birth</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="inputDob"
+                            name="dob"
+                            value="<%= userData.dob %>"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="inputHobbies"
+                          class="col-sm-2 col-form-label"
+                          >Hobbies</label
+                        >
+                        <div class="col-sm-10">
+                          <label for="singing">
+                            <input type="checkbox" name="hobby[]"
+                            value="Singing" id="singing" <% if (userData.hobbies
+                            && Array.isArray(userData.hobbies) &&
+                            userData.hobbies.includes('Singing')) { %> checked
+                            <% } %> /> Singing
+                          </label>
+
+                          <label for="dancing">
+                            <input type="checkbox" name="hobby[]"
+                            value="Dancing" id="dancing" <% if (userData.hobbies
+                            && Array.isArray(userData.hobbies) &&
+                            userData.hobbies.includes('Dancing')) { %> checked
+                            <% } %> /> Dancing
+                          </label>
+
+                          <label for="writing">
+                            <input type="checkbox" name="hobby[]"
+                            value="Writing" id="writing" <% if (userData.hobbies
+                            && Array.isArray(userData.hobbies) &&
+                            userData.hobbies.includes('Writing')) { %> checked
+                            <% } %> /> Writing
+                          </label>
+
+                          <label for="reading">
+                            <input type="checkbox" name="hobby[]"
+                            value="Reading" id="reading" <% if (userData.hobbies
+                            && Array.isArray(userData.hobbies) &&
+                            userData.hobbies.includes('Reading')) { %> checked
+                            <% } %> /> Reading
+                          </label>
+
+                          <label for="swimming">
+                            <input type="checkbox" name="hobby[]"
+                            value="Swimming" id="swimming" <% if
+                            (userData.hobbies && Array.isArray(userData.hobbies)
+                            && userData.hobbies.includes('Swimming')) { %>
+                            checked <% } %> /> Swimming
+                          </label>
+
+                          <label for="travelling">
+                            <input type="checkbox" name="hobby[]"
+                            value="Travelling" id="travelling" <% if
+                            (userData.hobbies && Array.isArray(userData.hobbies)
+                            && userData.hobbies.includes('Travelling')) { %>
+                            checked <% } %> /> Travelling
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button
+                            type="submit"
+                            class="btn btn-primary"
+                            name="submit"
+                            id="submit"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <%- include("../includes/footer.ejs") %>
+</div>
